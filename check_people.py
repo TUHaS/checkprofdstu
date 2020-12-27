@@ -1,6 +1,7 @@
 import argparse
 import logging
 import csv
+from pathlib import Path
 
 import vk
 import pandas as pd
@@ -62,6 +63,8 @@ def main(file_path: str, result_path: str) -> None:
     data_frame.to_csv(result_path, sep=",", header=True, index=False,
                       encoding='utf-8', quoting=csv.QUOTE_MINIMAL,
                       quotechar='"')
+    res_path = Path(result_path).resolve()
+    print(f'Result file was saved to {res_path}')
 
 
 if __name__ == '__main__':
