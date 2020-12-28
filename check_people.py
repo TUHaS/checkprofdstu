@@ -66,9 +66,7 @@ def main(file_path: str, result_path: str) -> None:
         else:
             data_frame.at[idx, COLUMN_NAME_STATUS] = STATUS_NOT_MEMBER
             logger.info(f"file-id: '{col_id}'. Set status '{STATUS_NOT_MEMBER}'")
-    data_frame.to_csv(result_path, sep=",", header=True, index=False,
-                      encoding='utf-8', quoting=csv.QUOTE_MINIMAL,
-                      quotechar='"')
+    data_frame.to_excel(result_path, header=True, index=False, encoding='utf-8')
     res_path = Path(result_path).resolve()
     logger.info(f"End processing. Save file to {res_path}")
     print(f'Result file was saved to {res_path}')
@@ -76,9 +74,9 @@ def main(file_path: str, result_path: str) -> None:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("-f", "--file", type=str,
+    parser.add_argument("-f", "--file", type=str, required=True,
                         help="file path to processing")
-    parser.add_argument("-o", "--output", type=str, default="result.csv",
+    parser.add_argument("-o", "--output", type=str, default="result.xlsx",
                         help="file path to result csv file")
     args = parser.parse_args()
     main(args.file, args.output)
